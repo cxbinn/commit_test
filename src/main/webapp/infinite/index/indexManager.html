@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+</head>
+
+
+<style>
+    body{width:1366px;}
+    #left{width:15%;border: dashed;border-color: inherit;border-width: 2px;float:left}
+    #view{width:80%;border: dashed;float:left}
+    #page{width:80%;float:left}
+    .demo{
+        width:10%;
+        float:left;
+
+    }
+    .demoIP{
+        width:35%;
+        float:left;
+
+    }
+    .demolast{
+    }
+
+</style>
+
+<script src="jquery-3.1.1.min.js"></script>
+
+
+
+<body>
+<div id="top">
+悟天格斯:UC0093
+<input type="button" value="setting">
+<input type="button" value="exit">
+</div>
+
+<div id="left">
+    <a>view</a>
+    <li>
+        <ul>my_virtualmechine</ul>
+        <ul>status</ul>
+        <ul>summery</ul>
+        <ul>my_team</ul>
+        <ul>my_apply</ul>
+    </li>
+    <a>control</a>
+    <li>
+        <ul>item1</ul>
+        <ul>item2</ul>
+        <ul>item3</ul>
+    </li>
+    <a>setting</a>
+    <li>
+        <ul>reset_password</ul>
+        <ul>basic_args</ul>
+        <ul>item3</ul>
+    </li>
+
+</div>
+<div id="right">
+<div id="search"><input type="text" value="search" ><input type="button" value="search"></div>
+<div id="view">
+
+    <div class="topTip">
+        <div class="demoIP">ip</div>
+        <div class="demo">cpu</div>
+        <div class="demo">MB</div>
+        <div class="demo">space</div>
+        <div class="demo">more</div>
+        <div class="demolast">button</div>
+    </div>
+
+            <div class="dataItem">
+                <div class="demoIP">10.130.2.200</div>
+                <div class="demo">99%</div>
+                <div class="demo">777MB</div>
+                <div class="demo">54%</div>
+                <div class="demo">more</div>
+                <div class="demolast"><input type='button' value='view' onclick='void(0)'></div>
+            </div>
+
+</div>
+    <div id="page"><a onclick="void(0)">before</a> 1 2 3 4 5 6 7 next last</div>
+</div>
+
+
+</body>
+</html>
+<script type="text/javascript">
+    var aliveVM;
+    $.ajax(
+        {
+            type:"get",
+            url:"http://10.134.159.91:8080/Lufy/ws/vm/read/readAliveVM",
+            async:false,
+            success:function(data){
+                aliveVM=data;
+                //alert(data);
+            }
+        }
+    )
+    var all;
+
+    for(var uuid in aliveVM){
+        $.ajax(
+            {
+                type:"get",
+                url:"http://10.134.159.91:8080/Lufy/ws/vm/read/read_singleMonitorData/"+aliveVM[uuid],
+                async:false,
+                success:function(data){
+                    //alert(data);
+                    /*
+                    do something for div - demo
+                     */
+                    if(data.length!=0) {
+                        all = data;
+                        var jsonObject = eval("(" + data + ")");
+                        var jsonObject2 = eval("(" + jsonObject["data"] + ")");
+                        document.getElementById("view").innerHTML += "<div class=\"dataItem\">" +
+                            "                <div class=\"demoIP\">" + jsonObject["uuid"] + "</div>" +
+                            "                <div class=\"demo\">" + jsonObject2[0]["Processor"]["% Processor time"]["_Total"] +"%"+ "</div>" +
+                            "                <div class=\"demo\">" + Math.floor(jsonObject2[0]["Memory"]["Available Bytes"][""]/1024/1024)+"MB" + "</div>" +
+                            "                <div class=\"demo\">" + jsonObject2[0]["LogicalDisk"]["% Free Space"]["_Total"] + "</div>" +
+                            "                <div class=\"demo\">" + jsonObject2[0]["LogicalDisk"]["% Free Space"]["_Total"] + "</div>" +
+                            "            <div class=\"demolast\"><input type='button' value='view' onclick='void(0)'></div></div>   ";
+                    }
+
+                }
+            }
+        )
+    }
+
+
+</script>

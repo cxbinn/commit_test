@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="OFF">
+	<appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{HH:mm:SS.sss} [%t] %-5level %logger{36} - %msg%n" />
+		</Console>
+
+		<File name="runinglog" fileName="log/runinglog.log" append="false">
+			<PatternLayout
+				pattern="%d{HH:mm:SS.sss} [%t] %-5level %class{36} %L %M - %msg%xEx%n" />
+		</File>
+
+		<RollingFile name="historyfile" fileName="logs/historyfile.log"
+			filePattern="log/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+			<PatternLayout
+				pattern="%d{yyyy-MM-dd 'at' HH:mm:ss z} %5level %class{36} %L %M - %msg%xEx%n" />
+			<SizeBasedTriggeringPolicy size="50MB" />
+		</RollingFile>
+
+	</appenders>
+	
+	<loggers>
+		<logger name="test.Hello" level="trace" additivity="false">
+			<appender-ref ref="Console"/>
+			<appender-ref ref="runninglog"/>
+			<appender-ref ref="historyfile"/>
+		</logger>
+		
+		<logger name="dao.TaskDao" level="trace" additivity="true">
+			<appender-ref ref="runninglog" />
+			<appender-ref ref="historyfile" />
+		</logger>
+		
+		<root level="error">
+			<appender-ref ref="Console"/>
+		</root>
+	
+	</loggers>
+	
+	
+
+</configuration>

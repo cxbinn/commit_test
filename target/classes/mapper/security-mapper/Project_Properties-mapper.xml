@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.skywalker.common.dao.Project_PropertiesDao" >
+	<select id="query" resultType="Project_Properties">
+		SELECT project_sn,project_name,register_date,department FROM Project_Properties WHERE project_sn=#{project_sn}
+	</select>
+	
+	<select id="selectAll" resultType="Project_Properties">
+		SELECT project_sn,project_name,register_date,department FROM Project_Properties
+	</select>
+	
+	
+	<insert id="save" parameterType="Project_Properties">
+		INSERT INTO project_properties(
+			project_sn,project_name,register_date,department)
+		VALUES (
+			#{project_sn},
+			#{project_name},
+			#{register_date},
+			#{department}
+		)
+	</insert>
+	<delete id="delete" parameterType="String">
+	DELETE FROM Project_Properties
+	WHERE project_sn=#{project_sn}
+	</delete>
+
+</mapper>

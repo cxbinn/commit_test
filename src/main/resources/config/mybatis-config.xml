@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>
+		<typeAlias alias="Task_List"
+			type="com.skywalker.basisSchedule.resultModel.Task_List" />
+		<typeAlias alias="T-Log"
+			type="com.skywalker.basisSchedule.resultModel.T_Log" />
+		<typeAlias alias="T_param"
+			type="com.skywalker.basisSchedule.resultModel.T_param" />
+		<typeAlias alias="API_Properties" type="com.skywalker.basisModel.API_Properties" />
+		<typeAlias alias="Manager_Properties"
+			type="com.skywalker.basisModel.Manager_Properties" />
+		<typeAlias alias="API_Passport" type="com.skywalker.basisModel.API_Passport" />
+		<typeAlias alias="Project_Properties"
+			type="com.skywalker.basisModel.Project_Properties" />
+		<typeAlias alias="Passport_Properties"
+			type="com.skywalker.basisModel.Passport_Properties" />
+		<typeAlias alias="Voucher_Order" type="com.skywalker.basisModel.Voucher_Order" />
+
+
+
+	</typeAliases>
+
+
+</configuration>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.skywalker.common.dao.Sys_UserDao" >
+	<select id="query" resultType="com.skywalker.basisModel.Sys_User">
+		SELECT id,name,password,email,safeword FROM user WHERE id=#{id}
+	</select>
+	
+	<select id="selectAll" resultType="com.skywalker.basisModel.Sys_User">
+		SELECT id,name,password,email,safeword FROM user
+	</select>
+	
+	
+	<insert id="save" parameterType="com.skywalker.basisModel.Sys_User">
+		INSERT INTO sys_user(
+			id,name,password,email,safeword)
+		VALUES (
+			#{id},
+			#{name},
+			#{password},
+			#{email},
+			#{safeword}			
+		)
+	</insert>
+	<delete id="delete" parameterType="com.skywalker.basisModel.Sys_User">
+	DELETE FROM sys_user
+	WHERE id=#{id}
+	</delete>
+
+</mapper>

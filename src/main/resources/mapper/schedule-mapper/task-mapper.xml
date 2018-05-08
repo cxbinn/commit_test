@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapperNS.Task" >
+	<select id="queryTask" resultType="Task">
+		SELECT task_id,name,des,taskclassname,type,st,para,prior,beg_time,end_time,cost,avg_cost FROM t_task
+	</select>
+	<insert id="insertTask" parameterType="Task">
+		INSERT INTO t_task(
+			task_id,name,des,taskclassname,type,st,para,prior,beg_time,end_time,cost,avg_cost)
+		VALUES (
+			#{task_id},
+			#{name},
+			#{des},
+			#{taskclassname},
+			#{type},
+			#{st},
+			#{para},
+			#{prior},
+			#{beg_time},
+			#{end_time},
+			#{cost},
+			#{avg_cost},
+		)
+	</insert>
+	<delete id="deleteTask" parameterType="int">
+	DELETE FROM t_task
+	WHERE task_id=#{task_id}
+	</delete>
+
+</mapper>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.skywalker.common.dao.Manager_PropertiesDao" >
+	<select id="query" resultType="Manager_Properties">
+		SELECT manager_sn,name,password,email,safeword FROM manager_properties WHERE manager_sn=#{manager_sn}
+	</select>
+	
+	<select id="selectAll" resultType="Manager_Properties">
+		SELECT manager_sn,name,password,email,safeword FROM manager_properties
+	</select>
+	
+	
+	<insert id="save" parameterType="Manager_Properties">
+		INSERT INTO manager_properties(
+			manager_sn,name,password,email,safeword,register_date,level )
+		VALUES (
+			#{manager_sn},
+			#{name},
+			#{password},
+			#{email},
+			#{safeword},
+			#{register_date},
+			#{level}			
+		)
+	</insert>
+	<delete id="delete" parameterType="Manager_Properties">
+	DELETE FROM manager_properties
+	WHERE manager_sn=#{manager_sn}
+	</delete>
+
+</mapper>
